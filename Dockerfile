@@ -26,6 +26,7 @@ RUN APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 \
         unzip \
         openssh-client \
         mariadb-client \
+        libbz2-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-configure \
@@ -73,6 +74,10 @@ RUN echo "cgi.fix_pathinfo=1" > ${php_vars} \
         -e "s/;listen.group = www-data/listen.group = nginx/g" \
         -e "s/^;clear_env = no$/clear_env = no/" \
         ${fpm_conf}
+
+# Install php composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer
 
 ENV WEBROOT=/var/www/html
 
