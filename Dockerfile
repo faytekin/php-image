@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-buster
+FROM php:8.0.2-fpm-buster
 
 ENV php_conf /usr/local/etc/php-fpm.conf
 ENV fpm_conf /usr/local/etc/php-fpm.d/www.conf
