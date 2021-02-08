@@ -41,8 +41,6 @@ RUN docker-php-ext-install bcmath \
     mbstring \
     gd \
     exif \
-    xsl \
-    json \
     soap \
     dom \
     zip \
@@ -51,7 +49,7 @@ RUN docker-php-ext-install bcmath \
     bz2 \
     pcntl
 
-RUN pecl install mcrypt-1.0.3 \
+RUN pecl install mcrypt-1.0.4 \
     && docker-php-ext-enable mcrypt
 
 # tweak php-fpm config
