@@ -47,7 +47,8 @@ RUN docker-php-ext-install bcmath \
     opcache \
     intl \
     bz2 \
-    pcntl
+    pcntl \
+    xdebug
 
 RUN pecl install mcrypt-1.0.4 \
     && docker-php-ext-enable mcrypt
