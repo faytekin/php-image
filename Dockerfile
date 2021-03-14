@@ -47,11 +47,15 @@ RUN docker-php-ext-install bcmath \
     opcache \
     intl \
     bz2 \
-    pcntl \
-    xdebug
+    pcntl
 
 RUN pecl install mcrypt-1.0.4 \
     && docker-php-ext-enable mcrypt
+
+RUN pecl install xdebug \
+    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 # tweak php-fpm config
 RUN echo "cgi.fix_pathinfo=1" > ${php_vars} \
