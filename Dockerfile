@@ -41,16 +41,19 @@ RUN docker-php-ext-install bcmath \
     mbstring \
     gd \
     exif \
-    soap \
     dom \
     zip \
     opcache \
     intl \
-    bz2 \
     pcntl
 
-RUN pecl install mcrypt-1.0.4 \
-    && docker-php-ext-enable mcrypt
+# Install mcrypt for php 8.1
+RUN curl -L -o /tmp/mcrypt.tgz "https://pecl.php.net/get/mcrypt/stable" \
+    && mkdir -p /usr/src/php/ext/mcrypt \
+    && tar -C /usr/src/php/ext/mcrypt -zxvf /tmp/mcrypt.tgz --strip 1 \
+    && docker-php-ext-configure mcrypt \
+    && docker-php-ext-install mcrypt \
+    && rm /tmp/mcrypt.tgz
 
 RUN pecl install xdebug \
     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
