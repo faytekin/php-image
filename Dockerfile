@@ -47,6 +47,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
         intl \
         pcntl \
         xdebug \
+        openswoole \
         # install latest composer 
         @composer \
         && docker-php-source delete
