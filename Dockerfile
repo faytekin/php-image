@@ -46,6 +46,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
         opcache \
         intl \
         pcntl \
+        mcrypt \
         xdebug \
         openswoole \
         # install latest composer 
